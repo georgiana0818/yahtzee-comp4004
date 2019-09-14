@@ -3,11 +3,18 @@ package YahtzeeGame.YahtzeeGame;
 public class Player {
 	
 	private String playerName;
-	private int score;
+	private int totalscore;
+	private int ones, twos, threes, fours, fives, sixs;
+	private int bonus;
+	private int largeStraight, smallStraight;
+	private int FullHouse;
+	private int threeKind, fourKind;
+	private int chance;
+	private int Yahtzee;
 	
 	public Player(String name) {
 		playerName = name;
-		score = 0;
+		totalscore = 0;
 	}
 
 	public String getPlayerName() {
@@ -15,14 +22,19 @@ public class Player {
 	}
 	
 	public int getCurrentScore() {
-		return score;
+		return totalscore;
 	}
 	
 	public void setScore(int currentScore) {
-		score = currentScore;
+		totalscore = currentScore;
+	}
+	
+	public void setOnes(int ones) {
+		this.ones = ones;
 	}
 	
 	public void showScoreBoard() {
-		
+		System.out.println("--------------------------------------------------------------------------------------------------------------------");
+		System.out.println("| Name: "+playerName+"          |Current Score: " + totalscore + "        | Current Round : ");
 	}
 }
