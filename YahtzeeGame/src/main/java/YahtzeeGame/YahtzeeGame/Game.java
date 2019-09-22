@@ -81,6 +81,11 @@ public class Game {
 			if(!checkSecondCategory(player.checkYahtzee())) {
 			player.setYahtzee(checkYahtzee(faceValues));
 			scored = true;
+			}else {
+				if(player.getYahtzee()!=0) {
+				System.out.println("You get an additional Yahtzee");
+				player.setAdditionYahtzee(100);
+				}
 			}
 			
 		}

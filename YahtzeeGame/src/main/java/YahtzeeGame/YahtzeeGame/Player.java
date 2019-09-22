@@ -27,7 +27,8 @@ public class Player {
 	private boolean hasChance = false;
 	private boolean hasYaht = false;
 	
-	private int bonus;
+	private int upperBonus;
+	private int additionYahtzee; 
 	private int upperScore = 0;
 	private int lowerScore = 0;
 	private int totalscore;
@@ -219,6 +220,14 @@ public class Player {
 	}
 	public boolean checkYahtzee() {
 		return hasYaht;
+	}
+	
+	public void setAdditionYahtzee(int addtionYahtzee) {
+		this.additionYahtzee += additionYahtzee;
+	}
+	
+	public int getAdditionYahtzee() {
+		return additionYahtzee;
 	}
 	
 	public void setChance(int cc) {

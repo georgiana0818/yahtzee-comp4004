@@ -111,12 +111,21 @@ public class PlayerTest extends TestCase {
 	
 	public void testAdditionYahtzee() {
 		Player tester = new Player();
+		Player tester2 = new Player();
 		Game tg = new Game(tester);
+		Game tg2 = new Game(tester2);
+		
 		int[] test = new int[] {2,2,2,2,2};
+		int[] test1 = new int [] {1,2,1,1,1};
 		int[] test2 = new int[] {3,3,3,3,3};
+		
 		tg.handleScore(tester, "13", test);
 		tg.handleScore(tester, "13", test2);
 		assertEquals(100, tester.getAdditionYahtzee());
+		
+		tg2.handleScore(tester2, "13", test1);
+		tg2.handleScore(tester2, "13", test2);
+		assertEquals(0, tester.getAdditionYahtzee());
 	}
 	
 
