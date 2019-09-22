@@ -7,10 +7,13 @@ public class Player {
 	private int ones, twos, threes, fours, fives, sixs;
 	private int bonus;
 	private int largeStraight, smallStraight;
-	private int FullHouse;
+	private int fullHouse;
 	private int threeKind, fourKind;
 	private int chance;
-	private int Yahtzee;
+	private int yahtzee;
+	
+	private int upperScore = 0;
+	private int lowerScore = 0;
 	
 	public Player(String name) {
 		playerName = name;
@@ -29,12 +32,29 @@ public class Player {
 		totalscore = currentScore;
 	}
 	
+	public void setUpperScore(int us) {
+		upperScore = us;
+	}
+	
+	public int getUpperScore() {
+		return upperScore;
+	}
+	
+	public void setYahtzee(int yahtzee) {
+		this.yahtzee = yahtzee;
+	}
+	
+	public int getYahtzee() {
+		return yahtzee;
+	}
+	
 	public void setOnes(int ones) {
 		this.ones = ones;
 	}
 	
-	public void showScoreBoard() {
-		System.out.println("--------------------------------------------------------------------------------------------------------------------");
-		System.out.println("| Name: "+playerName+"          |Current Score: " + totalscore + "        | Current Round : ");
+	public int getOnes() {
+		return ones;
 	}
+	
+	
 }

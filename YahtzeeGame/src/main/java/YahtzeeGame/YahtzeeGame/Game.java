@@ -1,8 +1,15 @@
 package YahtzeeGame.YahtzeeGame;
 
 public class Game {
-	public Game() {
+	private Player player;
+	public Game(Player player) {
+		this.player = player;
+	}
+	
+	public void start(){	
 		
+		
+	
 	}
 	
 	public int checkThreeKind(int[] dices) {
@@ -57,5 +64,17 @@ public class Game {
 		}
 		return sum;
 		
+	}
+	
+	public int additionYahtzee(Player player, int[] dices) {
+		int addtional = 0;
+		
+		return addtional;
+	}
+	
+	public int upperBonus(Player player) {
+		int bonus = 0;
+		
+		return bonus;
 	}
 }
