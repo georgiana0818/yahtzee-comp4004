@@ -57,5 +57,62 @@ public class PlayerTest extends TestCase {
 		assertEquals(6, tester.getSixs());
 	}
 	
+	public void testScoreLargeStraight() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {1,2,3,4,5};
+		tg.handleScore(tester,7,test);
+		assertEquals(40, tester.getLargeStraight());
+	}
+	
+	public void testScoreSmallStraight() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {1,2,3,4,6};
+		tg.handleScore(tester,8,test);
+		assertEquals(30, tester.getSmallStraight());
+	}
+	
+	public void testScoreFullHouse() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {1,2,1,2,1};
+		tg.handleScore(tester,9,test);
+		assertEquals(25, tester.getFullHouse());
+	}
+	
+	public void testScoreThreeKind() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {3,2,3,2,2};
+		tg.handleScore(tester,10,test);
+		assertEquals(12, tester.getThreeKind());
+	}
+	
+	public void testScoreFourKind() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {1,1,1,2,1};
+		tg.handleScore(tester,11,test);
+		assertEquals(6, tester.getFourKind());
+	}
+	
+	public void testScoreChance() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {1,1,1,2,1};
+		tg.handleScore(tester,12,test);
+		assertEquals(6, tester.getChance());
+	}
+	
+
+	public void testScoreYahtzee() {
+		Player tester = new Player("Tester");
+		Game tg = new Game(tester);
+		int test[] = new int[] {1,1,1,1,1};
+		tg.handleScore(tester,13,test);
+		assertEquals(50, tester.getYahtzee());
+	}
+	
 
 }

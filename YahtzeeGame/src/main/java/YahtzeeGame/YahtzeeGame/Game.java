@@ -14,6 +14,77 @@ public class Game {
 	
 	}
 	
+	public Boolean handleScore(Player player, String category, int[] faceValues) {
+		boolean scored = false;
+		if(category.equals("1")) {
+			if(!checkSecondCategory(player.getOnes())) {
+				player.setOnes(addUpperSection(faceValues,1));
+				scored = true;
+			}
+		}else if(category.equals("2")) {
+			if(!checkSecondCategory(player.getTwos())) {
+			player.setTwos(addUpperSection(faceValues,2));
+			scored = true;
+			}
+		}else if(category.equals("3")) {
+			if(!checkSecondCategory(player.getThrees())) {
+			player.setThrees(addUpperSection(faceValues,3));
+			scored = true;
+			}
+		}else if(category.equals("4")) {
+			if(!checkSecondCategory(player.getFours())) {
+			player.setFours(addUpperSection(faceValues,4));
+			scored = true;
+			}
+		}else if(category.equals("5")) {
+			if(!checkSecondCategory(player.getFives())) {
+			player.setFives(addUpperSection(faceValues,5));
+			scored = true;
+			}
+		}else if(category.equals("6")) {
+			if(!checkSecondCategory(player.getSixs())) {
+			player.setSixs(addUpperSection(faceValues,6));
+			scored = true;
+			}
+		}else if(category.equals("7")) {
+			if(!checkSecondCategory(player.getLargeStraight())) {
+			player.setLargeStraight(checkLargeStraight(faceValues));
+			scored = true;
+			}
+		}else if(category.equals("8")) {
+			if(!checkSecondCategory(player.getSmallStraight())) {
+			player.setSmallStraight(checkSmallStraight(faceValues));
+			scored = true;
+			}
+		}else if(category.equals("9")) {
+			if(!checkSecondCategory(player.getFullHouse())) {
+			player.setFullHouse(checkFullHouse(faceValues));
+			scored = true;
+			}
+		}else if(category.equals("10")) {
+			if(!checkSecondCategory(player.getThreeKind())) {
+			player.setThreeKind(checkThreeKind(faceValues));
+			scored = true;
+			}
+		}else if(category.equals("11")) {
+			if(!checkSecondCategory(player.getFourKind())) {
+			player.setFourKind(checkFourKind(faceValues));
+			scored = true;
+			}
+		}else if(category.equals("12")) {
+			if(!checkSecondCategory(player.getChance())) {
+			player.setChance(chance(faceValues));
+			scored = true;
+			}
+		}else if(category.equals("13")) {
+			if(!checkSecondCategory(player.getYahtzee())) {
+			player.setYahtzee(checkYahtzee(faceValues));
+			scored = true;
+			}
+		}
+		return scored;
+	}
+	
 	public int checkYahtzee(int[] dices) {
 		int sum = 0;
 		
