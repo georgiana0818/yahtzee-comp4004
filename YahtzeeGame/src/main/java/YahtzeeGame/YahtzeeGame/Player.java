@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 public class Player {
 	
 	private String playerName;
+	private int playerID;
 	private int totalscore;
 	private int ones, twos, threes, fours, fives, sixs;
 	private boolean hasOnes = false, hasTwos = false, hasThree = false, 

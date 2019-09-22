@@ -3,14 +3,9 @@ package YahtzeeGame.YahtzeeGame;
 import junit.framework.TestCase;
 
 public class PlayerTest extends TestCase {
-	
-	public void testPlayerName() {
-		Player tester = new Player("Tester");
-		assertEquals("Tester", tester.getPlayerName());
-	}
-	
+
 	public void testScoreOnes() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,2,1,1};
 		tg.handleScore(test,1,test);
@@ -18,7 +13,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreTwos() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,2,1,1};
 		tg.handleScore(tester,2,test);
@@ -26,7 +21,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreThrees() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {3,3,2,1,1};
 		tg.handleScore(tester,3,test);
@@ -34,7 +29,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreFours() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {3,3,4,1,1};
 		tg.handleScore(tester,4,test);
@@ -42,7 +37,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreFives() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,1,1};
 		tg.handleScore(tester,5,test);
@@ -50,7 +45,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreSixs() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,6,1};
 		tg.handleScore(tester,6,test);
@@ -58,7 +53,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreLargeStraight() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,3,4,5};
 		tg.handleScore(tester,7,test);
@@ -66,7 +61,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreSmallStraight() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,3,4,6};
 		tg.handleScore(tester,8,test);
@@ -74,7 +69,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreFullHouse() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,1,2,1};
 		tg.handleScore(tester,9,test);
@@ -82,7 +77,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreThreeKind() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {3,2,3,2,2};
 		tg.handleScore(tester,10,test);
@@ -90,7 +85,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreFourKind() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,1,2,1};
 		tg.handleScore(tester,11,test);
@@ -98,7 +93,7 @@ public class PlayerTest extends TestCase {
 	}
 	
 	public void testScoreChance() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,1,2,1};
 		tg.handleScore(tester,12,test);
@@ -107,7 +102,7 @@ public class PlayerTest extends TestCase {
 	
 
 	public void testScoreYahtzee() {
-		Player tester = new Player("Tester");
+		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,1,1,1};
 		tg.handleScore(tester,13,test);

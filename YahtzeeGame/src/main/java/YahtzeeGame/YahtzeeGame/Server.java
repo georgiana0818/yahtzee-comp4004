@@ -25,7 +25,29 @@ public class Server {
 	}
 	
 	public void start() {
-
+		System.out.println("Yahtzee Game Engine has starting, Waiting for players to join ...");
+		
+		try {
+			while(numOfPlayers < 3) {
+				clientSocket = socket.accept();
+				numOfPlayers++;
+				ClientHandler ch = new ClientHandler(clientSocket,numOfPlayers);
+				if(numOfPlayers == 1) {
+					player1 = ch;
+				}else if(numOfPlayers == 2) {
+					player2 = ch;
+				}else {
+					player3 = ch;
+				}
+				Thread t = new Thread(ch);
+				t.start();
+			}
+			System.out.println("We have 3 players. No more player can join in.");
+		} catch (IOException e) {
+			
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+		}
 	}
 	
 	private class ClientHandler implements Runnable{
@@ -33,11 +55,13 @@ public class Server {
 		private ObjectOutputStream oos;
 		private ObjectInputStream ois;
 		private int playerID;
+		private String playerName ="";
 
 		
 		public ClientHandler(Socket s, int id) {
 			socket = s;
 			playerID = id;
+			
 			try {
 				oos = new ObjectOutputStream(socket.getOutputStream());
 				ois = new ObjectInputStream(socket.getInputStream());
@@ -53,15 +77,27 @@ public class Server {
 
 		public void run() {
 			
-	
-			
+			try {
+				oos.writeObject(playerID);
+				
+				oos.flush();
+				playerName = (String) ois.readObject();
+				System.out.println(playerName + " has entered the lobby");
+				
+			}catch(IOException ex) {
+				ex.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		Server server = new Server();
+		server.start();
 	}
 
 }

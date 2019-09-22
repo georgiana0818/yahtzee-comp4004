@@ -99,8 +99,9 @@ public class GameTest extends TestCase{
 	public void testSecondCategory() {
 		Player player = new Player();
 		Game tg = new Game(player);
+		assertEquals(false, tg.checkSecondCategory(player));
 		player.setOnes(4);
-		assertEquals(true, tg.checkSecondCategory(player.getOnes()));
+		assertEquals(true, tg.checkSecondCategory(player));
 	}
 	
 	public void testReroll() {
