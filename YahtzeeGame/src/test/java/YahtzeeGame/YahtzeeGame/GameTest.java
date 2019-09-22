@@ -66,11 +66,18 @@ public class GameTest extends TestCase{
 	
 	public void testaddUpperSection() {
 		Player player = new Player("Tester");
-		Game tg = new Game(player);Game tg = new Game();
+		Game tg = new Game(player);
 		int[] test = new int[] {1,2,3,4,5};
 		int[] test2 = new int[] {2,2,3,4,5};
 		assertEquals(1, tg.addUpperSection(test, 1));
 		assertEquals(0, tg.addUpperSection(test2, 1));
+	}
+	
+	public void testChance() {
+		Player player = new Player("Tester");
+		Game tg = new Game(player);
+		int[] test = new int[] {1,2,3,4,5};
+		assertEquals(15, tg.chance(test));
 	}
 	
 	public void testAdditionYahtzee() {
@@ -81,10 +88,23 @@ public class GameTest extends TestCase{
 		assertEquals(100, tg.additionYahtzee(player,test));
 	}
 	
+	
 	public void testUpperBonus() {
 		Player player = new Player("Tester");
 		Game tg = new Game(player);
 		player.setUpperScore(63);
 		assertEquals(35, tg.upperBonus(player));
+	}
+	
+	public void testSecondCategory() {
+		Player player = new Player("Tester");
+		Game tg = new Game(player);
+		player.setOnes(4);
+		assertEquals(true, tg.checkSecondCategory(player.getOnes()));
+	}
+	
+	public void testReroll() {
+		Player player = new Player("Tester");
+		Game tg = new Game(player);
 	}
 }
