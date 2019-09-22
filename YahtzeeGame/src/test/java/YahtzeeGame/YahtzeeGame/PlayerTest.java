@@ -49,7 +49,7 @@ public class PlayerTest extends TestCase {
 		assertEquals(10, tester.getFives());
 	}
 	
-	public void testSetSixs() {
+	public void testScoreSixs() {
 		Player tester = new Player("Tester");
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,6,1};
