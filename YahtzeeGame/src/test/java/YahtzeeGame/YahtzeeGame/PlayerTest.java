@@ -8,7 +8,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,2,1,1};
-		tg.handleScore(test,1,test);
+		tg.handleScore(tester,"1",test);
 		assertEquals(4, tester.getOnes());
 	}
 	
@@ -16,7 +16,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,2,1,1};
-		tg.handleScore(tester,2,test);
+		tg.handleScore(tester,"2",test);
 		assertEquals(2, tester.getTwos());
 	}
 	
@@ -24,7 +24,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {3,3,2,1,1};
-		tg.handleScore(tester,3,test);
+		tg.handleScore(tester,"3",test);
 		assertEquals(6, tester.getThrees());
 	}
 	
@@ -32,7 +32,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {3,3,4,1,1};
-		tg.handleScore(tester,4,test);
+		tg.handleScore(tester,"4",test);
 		assertEquals(4, tester.getFours());
 	}
 	
@@ -40,7 +40,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,1,1};
-		tg.handleScore(tester,5,test);
+		tg.handleScore(tester,"5",test);
 		assertEquals(10, tester.getFives());
 	}
 	
@@ -48,7 +48,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,6,1};
-		tg.handleScore(tester,6,test);
+		tg.handleScore(tester,"6",test);
 		assertEquals(6, tester.getSixs());
 	}
 	
@@ -56,7 +56,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,3,4,5};
-		tg.handleScore(tester,7,test);
+		tg.handleScore(tester,"7",test);
 		assertEquals(40, tester.getLargeStraight());
 	}
 	
@@ -64,7 +64,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,3,4,6};
-		tg.handleScore(tester,8,test);
+		tg.handleScore(tester,"8",test);
 		assertEquals(30, tester.getSmallStraight());
 	}
 	
@@ -72,7 +72,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,1,2,1};
-		tg.handleScore(tester,9,test);
+		tg.handleScore(tester,"9",test);
 		assertEquals(25, tester.getFullHouse());
 	}
 	
@@ -80,7 +80,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {3,2,3,2,2};
-		tg.handleScore(tester,10,test);
+		tg.handleScore(tester,"10",test);
 		assertEquals(12, tester.getThreeKind());
 	}
 	
@@ -88,7 +88,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,1,2,1};
-		tg.handleScore(tester,11,test);
+		tg.handleScore(tester,"11",test);
 		assertEquals(6, tester.getFourKind());
 	}
 	
@@ -96,7 +96,7 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,1,2,1};
-		tg.handleScore(tester,12,test);
+		tg.handleScore(tester,"12",test);
 		assertEquals(6, tester.getChance());
 	}
 	
@@ -105,8 +105,18 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,1,1,1,1};
-		tg.handleScore(tester,13,test);
+		tg.handleScore(tester,"13",test);
 		assertEquals(50, tester.getYahtzee());
+	}
+	
+	public void testAdditionYahtzee() {
+		Player tester = new Player();
+		Game tg = new Game(tester);
+		int[] test = new int[] {2,2,2,2,2};
+		int[] test2 = new int[] {3,3,3,3,3};
+		tg.handleScore(tester, "13", test);
+		tg.handleScore(tester, "13", test2);
+		assertEquals(100, tester.getAdditionYahtzee());
 	}
 	
 
