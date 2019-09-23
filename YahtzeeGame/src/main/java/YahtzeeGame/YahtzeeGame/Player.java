@@ -12,6 +12,7 @@ public class Player {
 	
 	private String playerName;
 	private int playerID;
+	
 	private int ones, twos, threes, fours, fives, sixs;
 	private int largeStraight, smallStraight;
 	private int fullHouse;
@@ -30,46 +31,63 @@ public class Player {
 	private int upperBonus;
 	private int additionYahtzee; 
 	private int upperScore = 0;
-	private int lowerScore = 0;
-	private int totalscore;
+	private int currentScore;
+	
+	private int currentRound;
 	
 	private Client client;
 	private Scanner scan;
+	private Game game;
+	private UI ui;
 	
 	public Player() {
-		totalscore = 0;
+		currentScore = 0;
+		currentRound = 0;
 		scan = new Scanner(System.in);
+		ui = new UI();
 	}
 	
 	public void setPlayerName() {
 		String input = scan.nextLine();
 		playerName = input;
 		client.sendObject(playerName);
+		client.sendObject(ui.showScoreBoard(this));
 	}
 
 	public String getPlayerName() {
 		return playerName;
 	}
 	
-	public int getCurrentScore() {
-		return totalscore;
+	public int getCurrentRound() {
+		return currentRound;
 	}
 	
-	public void setScore(int currentScore) {
-		totalscore = currentScore;
+	public void setCurrentScore(int score) {
+		currentScore += score;
+	}
+	
+	public int getCurrentScore() {
+		return currentScore;
 	}
 	
 	public void setUpperScore(int us) {
-		upperScore = us;
+		upperScore += us;
 	}
 	
 	public int getUpperScore() {
 		return upperScore;
 	}
+	
+	public String input(String msg) {
+		System.out.println(msg);
+		return scan.nextLine();
+	}
 
 	public void setOnes(int ones) {
 		this.ones = ones;
 		hasOnes = true;
+		setUpperScore(this.ones);
+		setCurrentScore(this.ones);
 	}
 	
 	public int getOnes() {
@@ -83,6 +101,8 @@ public class Player {
 	public void setTwos(int twos) {
 		this.twos = twos;
 		hasTwos = true;
+		setUpperScore(this.twos);
+		setCurrentScore(this.twos);
 	}
 	
 	public int getTwos() {
@@ -96,6 +116,8 @@ public class Player {
 	public void setThrees(int threes) {
 		this.threes = threes;
 		hasThrees = true;
+		setUpperScore(this.threes);
+		setCurrentScore(this.threes);
 	}
 	
 	public int getThrees() {
@@ -109,6 +131,8 @@ public class Player {
 	public void setFours(int fours) {
 		this.fours = fours;
 		hasFours = true;
+		setUpperScore(this.fours);
+		setCurrentScore(this.fours);
 	}
 	
 	public int getFours() {
@@ -122,6 +146,8 @@ public class Player {
 	public void setFives(int fives) {
 		this.fives = fives;
 		hasFives = true;
+		setUpperScore(this.fives);
+		setCurrentScore(this.fives);
 	}
 	
 	public int getFives() {
@@ -135,6 +161,8 @@ public class Player {
 	public void setSixs(int sixs) {
 		this.sixs = sixs;
 		hasSixs = true;
+		setUpperScore(this.sixs);
+		setCurrentScore(this.sixs);
 	}
 	
 	public int getSixs() {
@@ -145,9 +173,14 @@ public class Player {
 		return hasSixs;
 	}
 	
+	public void setBonus() {
+		upperBonus = 35;
+	}
+	
 	public void setThreeKind(int tk) {
 		threeKind = tk;
 		hasTK = true;
+		setCurrentScore(this.threeKind);
 	}
 	
 	public int getThreeKind() {
@@ -161,6 +194,7 @@ public class Player {
 	public void setFourKind(int fk) {
 		fourKind = fk;
 		hasFK = true;
+		setCurrentScore(this.fourKind);
 	}
 	
 	public int getFourKind() {
@@ -174,6 +208,7 @@ public class Player {
 	public void setFullHouse(int fh) {
 		fullHouse = fh;
 		hasFH = true;
+		setCurrentScore(this.fullHouse);
 	}
 	
 	public int getFullHouse() {
@@ -187,6 +222,7 @@ public class Player {
 	public void setSmallStraight(int ss) {
 		smallStraight = ss;
 		hasSS = true;
+		setCurrentScore(this.smallStraight);
 	}
 	
 	public int getSmallStraight() {
@@ -200,6 +236,7 @@ public class Player {
 	public void setLargeStraight(int ls) {
 		largeStraight = ls;
 		hasLS = true;
+		setCurrentScore(this.largeStraight);
 	}
 	
 	public int getLargeStraight() {
@@ -211,8 +248,9 @@ public class Player {
 	}
 	
 	public void setYahtzee(int yz) {
-		yahtzee = yz;
-		hasYaht = true;
+		 yahtzee = yz;
+		 hasYaht = true;
+		 setCurrentScore(this.yahtzee);
 	}
 	
 	public int getYahtzee() {
@@ -222,8 +260,9 @@ public class Player {
 		return hasYaht;
 	}
 	
-	public void setAdditionYahtzee(int addtionYahtzee) {
-		this.additionYahtzee += additionYahtzee;
+	public void setAdditionYahtzee() {
+		this.additionYahtzee += 100;
+		
 	}
 	
 	public int getAdditionYahtzee() {
@@ -233,6 +272,7 @@ public class Player {
 	public void setChance(int cc) {
 		chance = cc;
 		hasChance = true;
+		setCurrentScore(this.chance);
 	}
 	
 	public int getChance() {
@@ -251,18 +291,56 @@ public class Player {
 		connectToServer();
 		setPlayerName();
 		
-		/*while((Integer) client.receiveObject()!= 3) {
-			client.sendObject("wait");
-			System.out.println("Wait for the other players");
-		}
+		client.receiveObject();
+		System.out.println(client.receiveObject());
 		
-		client.sendObject("Start");*/
+		if(playerID == 1) {
+			String m = (String) client.receiveObject();
+			String ready = input(m);
+			client.sendObject(ready);
+		}
+
 		String msg =  (String) client.receiveObject();//display score board
 		System.out.println(msg);
 		
 		
 		
+		msg = (String) client.receiveObject();//receive turn start sign
+		if(msg.equals("your turn")) {
+			game = new Game(this);
+			try {
+				while(currentRound < 13) {
+					game.start();
+					currentRound++;
+					client.sendObject("done");
+					client.oos.flush();
+					client.sendObject(ui.showScoreBoard(this));
+					client.oos.flush();
+					client.sendObject(currentScore);//send currentScore
+					client.oos.flush();
+					msg = (String) client.receiveObject();//receive score board
+					System.out.println(msg);
+					if(currentRound != 13) {
+						client.receiveObject();//receive turn start sign
+					}else {
+						msg = (String) client.receiveObject();//receive game result
+						System.out.println(msg);
+						client.sendObject("end");
+					}
+				}
+				
+				scan.close();
+				client.ois.close();
+				client.oos.close();
+				client.closeConnection();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
+	
 	class Client{
 		private Socket socket;
 		private InetAddress host;
@@ -311,9 +389,17 @@ public class Player {
 			}
 			return o;
 		}
+		
+		public void closeConnection() {
+			try {
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		Player p = new Player();
 		p.start();
 	}

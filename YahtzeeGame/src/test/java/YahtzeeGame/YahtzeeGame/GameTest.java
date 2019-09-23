@@ -2,6 +2,7 @@ package YahtzeeGame.YahtzeeGame;
 
 import junit.framework.TestCase;
 
+
 public class GameTest extends TestCase{
 	
 	public void testYahtzee() {
@@ -96,8 +97,12 @@ public class GameTest extends TestCase{
 		assertEquals(true, tg.checkSecondCategory(player.checkOnes()));
 	}
 	
-	public void testReroll() {
+	public void testRerollAll() {
 		Player player = new Player();
 		Game tg = new Game(player);
+		tg.start();
+		assertEquals(2,tg.getRerollCount());
+		
 	}
+	
 }

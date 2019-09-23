@@ -60,6 +60,18 @@ public class PlayerTest extends TestCase {
 		assertEquals(40, tester.getLargeStraight());
 	}
 	
+	public void testAdditionYahtzeeLargeStraight() {
+		Player tester = new Player();
+		Game tg = new Game(tester);
+		
+		int[] test = new int[] {2,2,2,2,2};
+		
+		
+		tg.handleScore(tester, "13", test);
+		tg.handleScore(tester, "7", test);
+		assertEquals(40, tester.getLargeStraight());
+	}
+	
 	public void testScoreSmallStraight() {
 		Player tester = new Player();
 		Game tg = new Game(tester);
@@ -68,11 +80,36 @@ public class PlayerTest extends TestCase {
 		assertEquals(30, tester.getSmallStraight());
 	}
 	
+	public void testAdditionYahtzeeSmallStraight() {
+		Player tester = new Player();
+		Game tg = new Game(tester);
+		
+		int[] test = new int[] {2,2,2,2,2};
+		
+		
+		tg.handleScore(tester, "13", test);
+		tg.handleScore(tester, "8", test);
+		assertEquals(30, tester.getSmallStraight());
+	}
+	
 	public void testScoreFullHouse() {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,1,2,1};
 		tg.handleScore(tester,"9",test);
+		assertEquals(25, tester.getFullHouse());
+		
+	}
+	
+	public void testAdditionYahtzeeFullHouse() {
+		Player tester = new Player();
+		Game tg = new Game(tester);
+		
+		int[] test = new int[] {2,2,2,2,2};
+		
+		
+		tg.handleScore(tester, "13", test);
+		tg.handleScore(tester, "9", test);
 		assertEquals(25, tester.getFullHouse());
 	}
 	
@@ -125,7 +162,7 @@ public class PlayerTest extends TestCase {
 		
 		tg2.handleScore(tester2, "13", test1);
 		tg2.handleScore(tester2, "13", test2);
-		assertEquals(0, tester.getAdditionYahtzee());
+		assertEquals(0, tester2.getAdditionYahtzee());
 	}
 	
 
