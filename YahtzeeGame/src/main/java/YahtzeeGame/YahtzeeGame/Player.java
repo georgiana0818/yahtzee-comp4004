@@ -27,8 +27,7 @@ public class Player {
 	private boolean hasTK = false, hasFK = false;
 	private boolean hasChance = false;
 	private boolean hasYaht = false;
-	
-	private int upperBonus;
+
 	private int additionYahtzee; 
 	private int upperScore = 0;
 	private int currentScore;
@@ -173,10 +172,6 @@ public class Player {
 		return hasSixs;
 	}
 	
-	public void setBonus() {
-		upperBonus = 35;
-	}
-	
 	public void setThreeKind(int tk) {
 		threeKind = tk;
 		hasTK = true;
@@ -262,7 +257,7 @@ public class Player {
 	
 	public void setAdditionYahtzee() {
 		this.additionYahtzee += 100;
-		
+		setCurrentScore(100);
 	}
 	
 	public int getAdditionYahtzee() {

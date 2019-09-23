@@ -34,14 +34,11 @@ public class Game {
 			facevalues = rollDice(dices);
 			
 			System.out.println(ui.showDices(dices));
-			
-			
-			
-			
+	
 			while(rerollcount < 2) {
 				input = player.input(displayActions());
 				try {
-					handleAction(input,player);
+					handleAction(input,player,facevalues);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -81,7 +78,7 @@ public class Game {
 		return msg;
 	}
 	
-	public void handleAction(String action,Player player) throws ClassNotFoundException, IOException {
+	public void handleAction(String action,Player player, int[] faceValues) throws ClassNotFoundException, IOException {
 			String msg;
 			if(action.equals("1")) {
 				msg = "Please enter in the dice position that you want to hold, please separate each number with a <<space>>";
@@ -95,13 +92,29 @@ public class Game {
 				System.out.println(ui.showDices(dices));
 				
 			}else if(action.equals("3")) {
-				msg ="What category do you want to score this round against? Please enter the category number: ";
-				String input = player.input(msg);
-				String category = input;
-				while(!handleScore(player, category, facevalues)) {
+				if(checkYahtzee(faceValues) == 50 && player.checkYahtzee() && additionYahtzeeHelper(faceValues)==false) {
+					if(faceValues[0] == 1) {
+						ScoreOne(faceValues);
+					}else if(faceValues[0] == 2) {
+						ScoreTwo(faceValues);
+					}else if(faceValues[0] == 3) {
+						ScoreThree(faceValues);
+					}else if(faceValues[0] == 4) {
+						ScoreFour(faceValues);
+					}else if(faceValues[0] == 5) {
+						ScoreFive(faceValues);
+					}else {
+						ScoreSix(faceValues);
+					}
+				}else {
 					msg ="What category do you want to score this round against? Please enter the category number: ";
-					input = player.input(msg);
-					category = input;
+					String input = player.input(msg);
+					String category = input;
+					while(handleScore(player, category, faceValues)==false) {
+						msg ="What category do you want to score this round against? Please enter the category number: ";
+						input = player.input(msg);
+						category = input;
+					}
 				}
 			}
 		
@@ -110,95 +123,214 @@ public class Game {
 	public Boolean handleScore(Player player, String category, int[] faceValues) {
 		boolean scored = false;
 		if(category.equals("1")) {
-			if(!checkSecondCategory(player.checkOnes())) {
-				player.setOnes(addUpperSection(faceValues,1));
-				player.setCurrentScore(upperBonus(player));
-				scored = true;
-			}
+			scored = ScoreOne(faceValues);
 		}else if(category.equals("2")) {
-			if(!checkSecondCategory(player.checkTwos())) {
-			player.setTwos(addUpperSection(faceValues,2));
-			player.setCurrentScore(upperBonus(player));
-			scored = true;
-			}
+			scored = ScoreTwo(faceValues);
 		}else if(category.equals("3")) {
-			if(!checkSecondCategory(player.checkThrees())) {
-			player.setThrees(addUpperSection(faceValues,3));
-			player.setCurrentScore(upperBonus(player));
-			scored = true;
-			}
+			scored = ScoreThree(faceValues);
 		}else if(category.equals("4")) {
-			if(!checkSecondCategory(player.checkFours())) {
-			player.setFours(addUpperSection(faceValues,4));
-			player.setCurrentScore(upperBonus(player));
-			scored = true;
-			}
+			scored = ScoreFour(faceValues);
 		}else if(category.equals("5")) {
-			if(!checkSecondCategory(player.checkFives())) {
-			player.setFives(addUpperSection(faceValues,5));
-			player.setCurrentScore(upperBonus(player));
-			scored = true;
-			}
+			scored = ScoreFive(faceValues);
 		}else if(category.equals("6")) {
-			if(!checkSecondCategory(player.checkSixs())) {
-			player.setSixs(addUpperSection(faceValues,6));
-			player.setCurrentScore(upperBonus(player));
-			scored = true;
-			}
+			scored = ScoreSix(faceValues);
 		}else if(category.equals("7")) {
-			if(!checkSecondCategory(player.checkLargeStraight())) {
-				if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
-					player.setLargeStraight(40);
-				}else {
-					player.setLargeStraight(checkLargeStraight(faceValues));
-				}
-				scored = true;
-			}
+			scored = ScoreLS(faceValues);
 		}else if(category.equals("8")) {
-			if(!checkSecondCategory(player.checkSmallStraight())) {
-				if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
-					player.setSmallStraight(30);
-				}else {
-					player.setSmallStraight(checkSmallStraight(faceValues));
-				}
-				scored = true;
-			}
+			scored = ScoreSS(faceValues);
 		}else if(category.equals("9")) {
-			if(!checkSecondCategory(player.checkFullHouse())) {
-				if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
-					player.setFullHouse(25);
-				}else {
-					player.setFullHouse(checkFullHouse(faceValues));
-				}
-				scored = true;
-			}
+			scored = ScoreFH(faceValues);
 		}else if(category.equals("10")) {
-			if(!checkSecondCategory(player.checkThreeKind())) {
-			player.setThreeKind(checkThreeKind(faceValues));
-			scored = true;
-			}
+			scored = ScoreTK(faceValues);
 		}else if(category.equals("11")) {
-			if(!checkSecondCategory(player.checkFourKind())) {
-			player.setFourKind(checkFourKind(faceValues));
-			System.out.println(player.getFourKind());
-			scored = true;
-			}
+			scored = ScoreFK(faceValues);
 		}else if(category.equals("12")) {
-			if(!checkSecondCategory(player.checkChance())) {
-			player.setChance(chance(faceValues));
-			scored = true;
-			}
+			scored = ScoreChance(faceValues);
 		}else if(category.equals("13")) {
 			if(checkSecondCategory(player.checkYahtzee()) == false) {
 				player.setYahtzee(checkYahtzee(faceValues));
 				scored = true;
-			}else {
-				if(player.getYahtzee()!=0) {
-					System.out.println("You get an additional Yahtzee");
-					player.setAdditionYahtzee();
-				}
 			}
-			
+		}
+		return scored;
+	}
+	
+	public boolean ScoreOne(int [] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkOnes())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setOnes(addUpperSection(faceValues,1));
+				player.setCurrentScore(upperBonus(player));
+				player.setAdditionYahtzee();
+			}else {
+				player.setOnes(addUpperSection(faceValues,1));
+				player.setCurrentScore(upperBonus(player));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreTwo(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkTwos())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setTwos(addUpperSection(faceValues,2));
+				player.setCurrentScore(upperBonus(player));
+				player.setAdditionYahtzee();
+			}else {
+				player.setTwos(addUpperSection(faceValues,2));
+				player.setCurrentScore(upperBonus(player));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreThree(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkThrees())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setThrees(addUpperSection(faceValues,3));
+				player.setCurrentScore(upperBonus(player));
+				player.setAdditionYahtzee();
+			}else {
+				player.setThrees(addUpperSection(faceValues,3));
+				player.setCurrentScore(upperBonus(player));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreFour(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkFours())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50 ) {
+				player.setFours(addUpperSection(faceValues,4));
+				player.setCurrentScore(upperBonus(player));
+				player.setAdditionYahtzee();
+			}else {
+				player.setFours(addUpperSection(faceValues,4));
+				player.setCurrentScore(upperBonus(player));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreFive(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkFives())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setFives(addUpperSection(faceValues,5));
+				player.setCurrentScore(upperBonus(player));
+				player.setAdditionYahtzee();
+			}else {
+				player.setFives(addUpperSection(faceValues,5));
+				player.setCurrentScore(upperBonus(player));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreSix(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkSixs())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setSixs(addUpperSection(faceValues,6));
+				player.setCurrentScore(upperBonus(player));
+				player.setAdditionYahtzee();
+			}else {
+				player.setSixs(addUpperSection(faceValues,6));
+				player.setCurrentScore(upperBonus(player));
+			}
+		scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreSS(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkSmallStraight())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setSmallStraight(30);
+				player.setAdditionYahtzee();
+			}else {
+				player.setSmallStraight(checkSmallStraight(faceValues));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreLS(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkLargeStraight())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setLargeStraight(40);
+				player.setAdditionYahtzee();
+			}else {
+				player.setLargeStraight(checkLargeStraight(faceValues));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreTK(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkThreeKind())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setThreeKind(checkThreeKind(faceValues));
+				player.setAdditionYahtzee();
+			}else {
+				player.setThreeKind(checkThreeKind(faceValues));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreFK(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkFourKind())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50 ) {
+				player.setFourKind(checkFourKind(faceValues));
+				player.setAdditionYahtzee();
+			}else {
+				player.setFourKind(checkFourKind(faceValues));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreChance(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkChance())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50) {
+				player.setChance(chance(faceValues));
+				player.setAdditionYahtzee();
+			}else {
+				player.setChance(chance(faceValues));
+			}
+			scored = true;
+		}
+		return scored;
+	}
+	
+	public boolean ScoreFH(int[] faceValues) {
+		boolean scored = false;
+		if(!checkSecondCategory(player.checkFullHouse())) {
+			if(player.checkYahtzee() && checkYahtzee(faceValues) == 50 ) {
+				player.setFullHouse(25);
+				player.setAdditionYahtzee();
+			}else {
+				player.setFullHouse(checkFullHouse(faceValues));
+			}
+			scored = true;
 		}
 		return scored;
 	}
@@ -357,16 +489,27 @@ public class Game {
 		return sum;	
 	}
 	
-	public int additionYahtzee(Player player, int[] dices) {
-		int addtional = 0;
-		
-		return addtional;
+	public boolean additionYahtzeeHelper(int[] dices) {
+		boolean check = false;
+		if(dices[0] == 1) {
+			check = player.checkOnes();
+		}else if(dices[0] == 2) {
+			check = player.checkTwos();
+		}else if(dices[0] == 3) {
+			check = player.checkThrees();
+		}else if(dices[0] == 4) {
+			check = player.checkFours();
+		}else if(dices[0] == 5) {
+			check = player.checkFives();
+		}else {
+			check = player.checkSixs();
+		}
+		return check;
 	}
 	
 	public int upperBonus(Player player) {
 		int bonus = 0;
 		if(player.getUpperScore() >= 63) {
-			player.setBonus();
 			bonus = 35;
 		}
 			
