@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public class Game {
 	private Dice[] dices = new Dice[5];
-	private int round = 1;
 	private int rerollcount;
 	private UI ui;
 	private int[] facevalues;
