@@ -12,6 +12,9 @@ public class PlayerTest extends TestCase {
 		int test[] = new int[] {1,1,2,1,1};
 		tg.handleScore(tester,"1",test);
 		assertEquals(4, tester.getOnes());
+		
+		boolean couldbeScored = tg.handleScore(tester,"1",test); //test scored category 5 again
+		assertEquals(false, couldbeScored);
 	}
 	
 	public void testScoreTwos() {
@@ -20,6 +23,9 @@ public class PlayerTest extends TestCase {
 		int test[] = new int[] {1,1,2,1,1};
 		tg.handleScore(tester,"2",test);
 		assertEquals(2, tester.getTwos());
+		
+		boolean couldbeScored = tg.handleScore(tester,"2",test); //test scored category 5 again
+		assertEquals(false, couldbeScored);
 	}
 	
 	public void testScoreThrees() {
@@ -28,6 +34,9 @@ public class PlayerTest extends TestCase {
 		int test[] = new int[] {3,3,2,1,1};
 		tg.handleScore(tester,"3",test);
 		assertEquals(6, tester.getThrees());
+		
+		boolean couldbeScored = tg.handleScore(tester,"3",test); //test scored category 5 again
+		assertEquals(false, couldbeScored);
 	}
 	
 	public void testScoreFours() {
@@ -36,6 +45,9 @@ public class PlayerTest extends TestCase {
 		int test[] = new int[] {3,3,4,1,1};
 		tg.handleScore(tester,"4",test);
 		assertEquals(4, tester.getFours());
+		
+		boolean couldbeScored = tg.handleScore(tester,"4",test); //test scored category 5 again
+		assertEquals(false, couldbeScored);
 	}
 	
 	public void testScoreFives() {
@@ -43,9 +55,11 @@ public class PlayerTest extends TestCase {
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,1,1};
 		tg.handleScore(tester,"5",test);
+		
 		assertEquals(10, tester.getFives());
-		boolean checkScored = tg.handleScore(tester,"5",test); //test scored category 5 again
-		assertEquals(false, checkScored);
+		
+		boolean couldbeScored = tg.handleScore(tester,"5",test); //test scored category 5 again
+		assertEquals(false, couldbeScored);
 	}
 	
 	public void testScoreSixs() {
@@ -53,7 +67,11 @@ public class PlayerTest extends TestCase {
 		Game tg = new Game(tester);
 		int test[] = new int[] {5,5,4,6,1};
 		tg.handleScore(tester,"6",test);
+		
 		assertEquals(6, tester.getSixs());
+		
+		boolean couldbeScored = tg.handleScore(tester,"6",test); //test scored category 5 again
+		assertEquals(false, couldbeScored);
 	}
 	
 	public void testScoreLargeStraight() {
