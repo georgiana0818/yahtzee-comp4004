@@ -44,6 +44,8 @@ public class PlayerTest extends TestCase {
 		int test[] = new int[] {5,5,4,1,1};
 		tg.handleScore(tester,"5",test);
 		assertEquals(10, tester.getFives());
+		boolean checkScored = tg.handleScore(tester,"5",test); //test scored category 5 again
+		assertEquals(false, checkScored);
 	}
 	
 	public void testScoreSixs() {
