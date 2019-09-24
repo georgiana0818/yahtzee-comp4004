@@ -27,8 +27,10 @@ public class Player {
 	private boolean hasTK = false, hasFK = false;
 	private boolean hasChance = false;
 	private boolean hasYaht = false;
+	private boolean hasBonus = false;
 
 	private int additionYahtzee; 
+	private int upperBonus;
 	private int upperScore = 0;
 	private int currentScore;
 	
@@ -171,6 +173,19 @@ public class Player {
 		return hasSixs;
 	}
 	
+	public void setBonus(int bonus) {
+		upperBonus = bonus;
+		hasBonus = true;
+	}
+	
+	public int getBonus() {
+		return upperBonus;
+	}
+	
+	public boolean checkBonus() {
+		return hasBonus;
+	}
+	
 	public void setThreeKind(int tk) {
 		threeKind = tk;
 		hasTK = true;
@@ -287,20 +302,21 @@ public class Player {
 		setPlayerName();
 		
 		client.receiveObject(); 
-		System.out.println(client.receiveObject());
+		System.out.println(client.receiveObject());//display waiting
 		
-		/*if(playerID == 1) {
+		if(playerID == 1) {
 			System.out.println(client.receiveObject());
-			
-			client.sendObject(input());
-		}*/
+			input();
+			client.sendObject("The game is starting");
+		}
+	
 
-		String msg = (String) client.receiveObject();//display score board
-		System.out.println(msg);
+		String board = (String) client.receiveObject();//display score board
+		System.out.println(board);
 		
 		
 		
-		msg = (String) client.receiveObject();//receive turn start sign
+		String msg = (String) client.receiveObject();//receive turn start sign
 		if(msg.equals("your turn")) {
 			game = new Game(this);
 			try {

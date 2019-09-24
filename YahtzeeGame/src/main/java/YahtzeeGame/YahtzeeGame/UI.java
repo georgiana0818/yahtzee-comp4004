@@ -17,7 +17,7 @@ board += "----------------------------------------------------------------------
 + "        | Current Round : "+ (player.getCurrentRound()+1) + "                                            "
 + "        |\n|-------------------------------------------------------------------------------------------------------------------|\n|"
 + "(1) Ones:"+ player.getOnes() +" | (2) Twos:" + player.getTwos() + " | (3)Threes:" + player.getThrees()
-+ " | (4) Fours:" + player.getFours() + " | (5) Fives:" + player.getFives() + " | (6) Sixs:" + player.getSixs() + " |\n"
++ " | (4) Fours:" + player.getFours() + " | (5) Fives:" + player.getFives() + " | (6) Sixs:" + player.getSixs() + " | Bonus:" + player.getBonus() +"   |\n"
 + "|-------------------------------------------------------------------------------------------------------------------|\n"
 + "| (7) Large Straight:" + player.getLargeStraight() + " | (8) Small Straight:" + player.getSmallStraight()
 + " | (9) Full House:" + player.getFullHouse() + " | (10) Three Kinds:" + player.getThreeKind()

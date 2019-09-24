@@ -209,8 +209,7 @@ public class PlayerTest extends TestCase {
 		tg.handleScore(tester, "4", new int[]{4,4,4,4,6});
 		tg.handleScore(tester, "3", new int[]{3,1,1,1,1});
 		
-		int scorebeforeBonus = 63;
-		assertEquals(35, (tester.getCurrentScore() - scorebeforeBonus));
+		assertEquals(35, tester.getBonus());
 	}	
 	
 }

@@ -508,8 +508,9 @@ public class Game {
 	
 	public int upperBonus(Player player) {
 		int bonus = 0;
-		if(player.getUpperScore() >= 63) {
+		if(player.getUpperScore() >= 63 && !player.checkBonus()) {
 			bonus = 35;
+			player.setBonus(bonus);
 			System.out.println("Upper Score is higher than or equal to 63. You earn an upper bonus");
 		}
 			

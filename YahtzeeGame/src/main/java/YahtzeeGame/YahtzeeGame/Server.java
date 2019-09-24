@@ -97,30 +97,30 @@ public class Server {
 				
 				if(count == 3) {
 					if(playerID == 1) {
-						//oos.writeObject("Ready Player One?");
-						//ois.readObject();
-						System.out.println("The game is starting");
-						sendScoreboard(player1Board,player2Board,player3Board);
-						oos.writeObject("your turn");
-						oos.flush();
-					}else if(playerID == 2) {
-						//player1.oos.writeObject("Ready Player One?");
-						//player1.ois.readObject();
-						System.out.println("The game is starting");
-						sendScoreboard(player1Board,player2Board,player3Board);
-						player1.notifyPlayer();
+						oos.writeObject("Ready Player One?");
+						//sendScoreboard(player1Board,player2Board,player3Board);
+						//oos.writeObject("your turn");
+						//oos.flush();
+					}else if(playerID == 2) {					
+						player1.oos.writeObject("Ready Player One?");
+						//sendScoreboard(player1Board,player2Board,player3Board);
+						//player1.notifyPlayer();
 						
 					}else {
-						//player1.oos.writeObject("Ready Player One?");
-						//player1.ois.readObject();
-						System.out.println("The game is starting");
-						sendScoreboard(player1Board,player2Board,player3Board);
-						player1.notifyPlayer();
+						player1.oos.writeObject("Ready Player One?");
+						//sendScoreboard(player1Board,player2Board,player3Board);
+						//player1.notifyPlayer();
 						
 					}
 					
 				}
-			
+				
+				if(playerID == 1) {
+					System.out.println(ois.readObject());
+					sendScoreboard(player1Board,player2Board,player3Board);
+					oos.writeObject("your turn");
+				}
+				
 				while(round < 13) {
 					 
 					received = (String) ois.readObject();//tell server turn end
