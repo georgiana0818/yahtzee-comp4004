@@ -2,7 +2,7 @@ package YahtzeeGame.YahtzeeGame;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
+
 
 public class Server {
 	private ServerSocket socket;
@@ -14,9 +14,7 @@ public class Server {
 	private String scoreBoard1, scoreBoard2, scoreBoard3;
 	private int player1Score, player2Score, player3Score;
 	private int count = 0;
-	
-	
-	
+
 	public Server() {
 		numOfPlayers = 0;
 		try {
@@ -98,35 +96,23 @@ public class Server {
 				if(count == 3) {
 					if(playerID == 1) {
 						oos.writeObject("Ready Player One?");
-						//sendScoreboard(player1Board,player2Board,player3Board);
-						//oos.writeObject("your turn");
-						//oos.flush();
 					}else if(playerID == 2) {					
 						player1.oos.writeObject("Ready Player One?");
-						//sendScoreboard(player1Board,player2Board,player3Board);
-						//player1.notifyPlayer();
-						
 					}else {
 						player1.oos.writeObject("Ready Player One?");
-						//sendScoreboard(player1Board,player2Board,player3Board);
-						//player1.notifyPlayer();
-						
 					}
-					
 				}
-				
 				if(playerID == 1) {
 					System.out.println(ois.readObject());
 					sendScoreboard(player1Board,player2Board,player3Board);
 					oos.writeObject("your turn");
 				}
-				
 				while(round < 13) {
-					 
 					received = (String) ois.readObject();//tell server turn end
 					System.out.println("Player " + playerID + " has completed their turn");
-				
+	
 					round++;
+					
 					if(playerID == 1) {
 						player1Board = (String) ois.readObject();
 						player1Score = (Integer) ois.readObject();
