@@ -241,21 +241,19 @@ public class Server {
 				player2.oos.writeObject(msg);
 				player3.oos.writeObject(msg);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		
 		public void closeConnection() {
 			try {
 				socket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
-
 
 	public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException{
 		Server server = new Server();

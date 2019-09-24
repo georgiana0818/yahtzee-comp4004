@@ -31,7 +31,7 @@ public class Player {
 
 	private int additionYahtzee; 
 	private int upperBonus;
-	private int upperScore = 0;
+	private int upperScore;
 	private int currentScore;
 	
 	private int currentRound;
@@ -43,6 +43,7 @@ public class Player {
 	
 	public Player() {
 		currentScore = 0;
+		upperScore = 0;
 		currentRound = 0;
 		scan = new Scanner(System.in);
 		ui = new UI();
@@ -309,12 +310,9 @@ public class Player {
 			input();
 			client.sendObject("The game is starting");
 		}
-	
 
 		String board = (String) client.receiveObject();//display score board
 		System.out.println(board);
-		
-		
 		
 		String msg = (String) client.receiveObject();//receive turn start sign
 		if(msg.equals("your turn")) {
@@ -345,11 +343,9 @@ public class Player {
 				client.oos.close();
 				client.closeConnection();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		
 	}
 	
 	class Client{
@@ -368,13 +364,10 @@ public class Player {
 		        playerID = (Integer) ois.readObject();
 		        System.out.println("Welcome Player" + playerID +", Please enter you name:");
 			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -383,7 +376,6 @@ public class Player {
 			try {
 				oos.writeObject(o);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -392,10 +384,8 @@ public class Player {
 			try {
 				 o = ois.readObject();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return o;
@@ -405,7 +395,6 @@ public class Player {
 			try {
 				socket.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

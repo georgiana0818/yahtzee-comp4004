@@ -35,7 +35,7 @@ public class Game {
 			System.out.println(ui.showDices(dices));
 			displayActions();
 			while(rerollcount < 2) {
-				input = player.input();
+				input = validateInput();
 				try {
 					handleAction(input,player,facevalues);
 				} catch (ClassNotFoundException e) {
@@ -78,6 +78,24 @@ public class Game {
 		
 	}
 	
+	public String validateInput() {
+		String input = player.input();
+		while(true) {
+			if(input.equals("1")) {
+				break;
+			}else if(input.equals("2")) {
+				break;
+			}else if(input.equals("3")) {
+				break;
+			}else {
+				System.out.println("Please choose again!");
+				displayActions();
+				input = player.input();
+			}
+		}
+		return input;
+	}
+	
 	public void handleAction(String action,Player player, int[] faceValues) throws ClassNotFoundException, IOException {
 			if(action.equals("1")) {
 				System.out.println("Please enter in the dice position that you want to hold, please separate each number with a <<space>>");
@@ -115,6 +133,8 @@ public class Game {
 						category = input;
 					}
 				}
+			}else {
+				
 			}
 		
 	}
