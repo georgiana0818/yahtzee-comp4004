@@ -97,22 +97,22 @@ public class Server {
 				
 				if(count == 3) {
 					if(playerID == 1) {
-						oos.writeObject("Ready Player One?");
-						ois.readObject();
+						//oos.writeObject("Ready Player One?");
+						//ois.readObject();
 						System.out.println("The game is starting");
 						sendScoreboard(player1Board,player2Board,player3Board);
 						oos.writeObject("your turn");
 						oos.flush();
 					}else if(playerID == 2) {
-						player1.oos.writeObject("Ready Player One?");
-						player1.ois.readObject();
+						//player1.oos.writeObject("Ready Player One?");
+						//player1.ois.readObject();
 						System.out.println("The game is starting");
 						sendScoreboard(player1Board,player2Board,player3Board);
 						player1.notifyPlayer();
 						
 					}else {
-						player1.oos.writeObject("Ready Player One?");
-						player1.ois.readObject();
+						//player1.oos.writeObject("Ready Player One?");
+						//player1.ois.readObject();
 						System.out.println("The game is starting");
 						sendScoreboard(player1Board,player2Board,player3Board);
 						player1.notifyPlayer();
@@ -234,15 +234,15 @@ public class Server {
 		public void checkWinner() {
 			String msg;
 			if(player1Score > player2Score && player1Score > player3Score) {
-				msg = "Congratulations, " + player1.playerName + "has won the game with a score of "
+				msg = "Congratulations, " + player1.playerName + " has won the game with a score of "
 					 + player1Score + " points!!!!!\nGreat game everyone, and thanks for playing. Goodbye."
 					 + "\n\nSo Long, And Thanks For All The Fish!";
 			}else if(player2Score > player1Score && player2Score > player3Score) {
-				msg = "Congratulations, " + player2.playerName + "has won the game with a score of "
+				msg = "Congratulations, " + player2.playerName + " has won the game with a score of "
 						 + player2Score + " points!!!!!\nGreat game everyone, and thanks for playing. Goodbye."
 						 + "\n\nSo Long, And Thanks For All The Fish!";
 			}else if(player3Score > player1Score && player3Score > player2Score) {
-				msg = "Congratulations, " + player3.playerName + "has won the game with a score of "
+				msg = "Congratulations, " + player3.playerName + " has won the game with a score of "
 						 + player3Score + " points!!!!!\nGreat game everyone, and thanks for playing. Goodbye."
 						 + "\n\nSo Long, And Thanks For All The Fish!";
 			}else {

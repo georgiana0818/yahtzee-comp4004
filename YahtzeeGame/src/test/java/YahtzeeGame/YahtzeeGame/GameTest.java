@@ -19,7 +19,7 @@ public class GameTest extends TestCase{
 	public void testFullHouse() {
 		Player player = new Player();
 		Game tg = new Game(player);
-		int[] test = new int[] {1,2,1,2,1};
+		int[] test = new int[] {3,5,3,3,5};
 		int[] test2 = new int[] {4,2,1,2,1};
 		assertEquals(25, tg.checkFullHouse(test));
 		assertEquals(0, tg.checkFullHouse(test2));

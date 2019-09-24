@@ -19,11 +19,11 @@ board += "----------------------------------------------------------------------
 + "(1) Ones:"+ player.getOnes() +" | (2) Twos:" + player.getTwos() + " | (3)Threes:" + player.getThrees()
 + " | (4) Fours:" + player.getFours() + " | (5) Fives:" + player.getFives() + " | (6) Sixs:" + player.getSixs() + " |\n"
 + "|-------------------------------------------------------------------------------------------------------------------|\n"
-+ "| (7) Small Straight:" + player.getSmallStraight() + " | (8) Large Straight:" + player.getLargeStraight()
++ "| (7) Large Straight:" + player.getLargeStraight() + " | (8) Small Straight:" + player.getSmallStraight()
 + " | (9) Full House:" + player.getFullHouse() + " | (10) Three Kinds:" + player.getThreeKind()
 + " |\n|-------------------------------------------------------------------------------------------------------------------|\n"
-+ "| (11) Four Kinds:" + player.getFourKind() + " | (12) Yahtzee:" + player.getYahtzee()
-+ " | (13) Chance:" + player.getChance() + "|\n"
++ "| (11) Four Kinds:" + player.getFourKind() + " | (12) Chance:" + player.getChance()
++ " | (13) Yahtzee:" + player.getYahtzee() + "|\n"
 +"---------------------------------------------------------------------------------------------------------------------\n";
 
 

@@ -77,8 +77,7 @@ public class Player {
 		return upperScore;
 	}
 	
-	public String input(String msg) {
-		System.out.println(msg);
+	public String input() {
 		return scan.nextLine();
 	}
 
@@ -235,6 +234,7 @@ public class Player {
 	}
 	
 	public int getLargeStraight() {
+		
 		return largeStraight;
 	}
 	
@@ -286,16 +286,16 @@ public class Player {
 		connectToServer();
 		setPlayerName();
 		
-		client.receiveObject();
+		client.receiveObject(); 
 		System.out.println(client.receiveObject());
 		
-		if(playerID == 1) {
-			String m = (String) client.receiveObject();
-			String ready = input(m);
-			client.sendObject(ready);
-		}
+		/*if(playerID == 1) {
+			System.out.println(client.receiveObject());
+			
+			client.sendObject(input());
+		}*/
 
-		String msg =  (String) client.receiveObject();//display score board
+		String msg = (String) client.receiveObject();//display score board
 		System.out.println(msg);
 		
 		

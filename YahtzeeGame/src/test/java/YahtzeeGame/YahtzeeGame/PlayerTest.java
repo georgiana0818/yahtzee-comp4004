@@ -71,7 +71,7 @@ public class PlayerTest extends TestCase {
 		int test2[] = new int[] {1,2,3,4,6};
 		tg2.handleScore(tester2,"7",test2);
 		assertEquals(0, tester2.getLargeStraight());
-		assertEquals(false, tester2.checkLargeStraight());
+		assertEquals(true, tester2.checkLargeStraight());//0 still be scored
 	}
 	
 	public void testAdditionYahtzeeLargeStraight() throws ClassNotFoundException, IOException {
@@ -105,7 +105,7 @@ public class PlayerTest extends TestCase {
 		int test2[] = new int[] {1,2,1,4,6};
 		tg2.handleScore(tester2,"8",test2);
 		assertEquals(0, tester2.getSmallStraight());
-		assertEquals(false, tester2.checkSmallStraight());
+		assertEquals(true, tester2.checkSmallStraight());
 	}
 	
 	public void testAdditionYahtzeeSmallStraight() throws ClassNotFoundException, IOException {
@@ -201,5 +201,18 @@ public class PlayerTest extends TestCase {
 		assertEquals(0, tester2.getAdditionYahtzee());
 	}
 	
-
+	public void testScoreUpperBonus() {
+		Player tester = new Player();
+		Game tg = new Game(tester);
+		tg.handleScore(tester, "5", new int[]{5,5,5,5,6});
+		tg.handleScore(tester, "6", new int[]{6,6,6,6,5});
+		tg.handleScore(tester, "4", new int[]{4,4,4,4,6});
+		tg.handleScore(tester, "3", new int[]{3,1,1,1,1});
+		
+		int scorebeforeBonus = 63;
+		assertEquals(35, (tester.getCurrentScore() - scorebeforeBonus));
+	}	
+	
 }
+
+

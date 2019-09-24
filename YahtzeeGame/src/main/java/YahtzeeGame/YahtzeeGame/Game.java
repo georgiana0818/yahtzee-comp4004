@@ -26,16 +26,16 @@ public class Game {
 	}
 	
 	public void turn(Player player){
-		String msg = "Press <<Enter>> to roll the dices...";
-		String input = player.input(msg);
+		System.out.println("Press <<Enter>> to roll the dices...");
+		String input = player.input();
 		
 		if(input.equals("")) {
 			facevalues = rollDice();
 			
 			System.out.println(ui.showDices(dices));
-	
+			displayActions();
 			while(rerollcount < 2) {
-				input = player.input(displayActions());
+				input = player.input();
 				try {
 					handleAction(input,player,facevalues);
 				} catch (ClassNotFoundException e) {
@@ -45,18 +45,24 @@ public class Game {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//displayActions();
+				
 				if(input.equals("3")) {
 					break;
 				}
+				
+				
 				rerollcount++;
+				if(rerollcount < 2) {
+					displayActions();
+				}
+				
 				if(rerollcount == 2) {
-					msg = "What category do you want to score this round against? Please enter the category number: ";
-					input = player.input(msg);
+					System.out.println("What category do you want to score this round against? Please enter the category number: ");
+					input = player.input();
 					String category = input;
 					while(!handleScore(player, category, facevalues)) {
-						msg ="What category do you want to score this round against? Please enter the category number: ";
-						input = player.input(input);
+						System.out.println("What category do you want to score this round against? Please enter the category number: ");
+						input = player.input();
 						category = input;
 					}
 				}
@@ -64,21 +70,20 @@ public class Game {
 		}
 	}
 	
-	public String displayActions() {
-		String msg = "What action would you like to perform next\n"+
+	public void displayActions() {
+		System.out.println("What action would you like to perform next\n"+
 					"(1) Select dice to hold and then re-roll the other dice\n"+
 					"(2) Re-roll all the dice\n"+
-					"(3) Score this round";
-		return msg;
+					"(3) Score this round");
+		
 	}
 	
 	public void handleAction(String action,Player player, int[] faceValues) throws ClassNotFoundException, IOException {
-			String msg;
 			if(action.equals("1")) {
-				msg = "Please enter in the dice position that you want to hold, please separate each number with a <<space>>";
-				String input = player.input(msg);	
+				System.out.println("Please enter in the dice position that you want to hold, please separate each number with a <<space>>");
+				String input = player.input();	
 				int[] hold = rerollHelper(inputConverter(input));
-				rerollDice(hold);
+				facevalues = rerollDice(hold);
 				System.out.println(ui.showDices(dices));
 				
 			}else if(action.equals("2")) {
@@ -101,12 +106,12 @@ public class Game {
 						ScoreSix(faceValues);
 					}
 				}else {
-					msg ="What category do you want to score this round against? Please enter the category number: ";
-					String input = player.input(msg);
+					System.out.println("What category do you want to score this round against? Please enter the category number: ");
+					String input = player.input();
 					String category = input;
-					while(handleScore(player, category, faceValues)==false) {
-						msg ="What category do you want to score this round against? Please enter the category number: ";
-						input = player.input(msg);
+					while(!handleScore(player, category, faceValues)) {
+						System.out.println("What category do you want to score this round against? Please enter the category number: ");
+						input = player.input();
 						category = input;
 					}
 				}
@@ -252,7 +257,7 @@ public class Game {
 				player.setSmallStraight(30);
 				player.setAdditionYahtzee();
 			}else {
-				player.setSmallStraight(checkSmallStraight(faceValues));
+				player.setSmallStraight(checkSmallStraight(faceValues));		
 			}
 			scored = true;
 		}
@@ -505,6 +510,7 @@ public class Game {
 		int bonus = 0;
 		if(player.getUpperScore() >= 63) {
 			bonus = 35;
+			System.out.println("Upper Score is higher than or equal to 63. You earn an upper bonus");
 		}
 			
 		return bonus;
