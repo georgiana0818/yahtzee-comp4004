@@ -60,6 +60,18 @@ public class PlayerTest extends TestCase {
 		int test[] = new int[] {1,2,3,4,5};
 		tg.handleScore(tester,"7",test);
 		assertEquals(40, tester.getLargeStraight());
+		assertEquals(true, tester.checkLargeStraight());
+		
+		int test1[] = new int[] {2,3,4,5,2}; //test the category has been scored and it cannot be scored again
+		boolean couldbeScored = tg.handleScore(tester,"7",test1);
+		assertEquals(false, couldbeScored);
+		
+		Player tester2 = new Player();
+		Game tg2 = new Game(tester2);
+		int test2[] = new int[] {1,2,3,4,6};
+		tg2.handleScore(tester2,"7",test2);
+		assertEquals(0, tester2.getLargeStraight());
+		assertEquals(false, tester2.checkLargeStraight());
 	}
 	
 	public void testAdditionYahtzeeLargeStraight() throws ClassNotFoundException, IOException {
@@ -79,8 +91,21 @@ public class PlayerTest extends TestCase {
 		Player tester = new Player();
 		Game tg = new Game(tester);
 		int test[] = new int[] {1,2,3,4,6};
-		tg.handleScore(tester,"8",test);
+		
+		tg.handleScore(tester,"8",test);//test the category score
 		assertEquals(30, tester.getSmallStraight());
+		assertEquals(true, tester.checkSmallStraight());
+		
+		int test1[] = new int[] {2,3,4,5,2}; //test the category has been scored and it cannot be scored again
+		boolean couldbeScored = tg.handleScore(tester,"8",test1);
+		assertEquals(false, couldbeScored);
+		
+		Player tester2 = new Player();
+		Game tg2 = new Game(tester2);
+		int test2[] = new int[] {1,2,1,4,6};
+		tg2.handleScore(tester2,"8",test2);
+		assertEquals(0, tester2.getSmallStraight());
+		assertEquals(false, tester2.checkSmallStraight());
 	}
 	
 	public void testAdditionYahtzeeSmallStraight() throws ClassNotFoundException, IOException {
