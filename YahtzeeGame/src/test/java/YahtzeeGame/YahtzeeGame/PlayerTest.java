@@ -79,11 +79,9 @@ public class PlayerTest extends TestCase {
 		Game tg = new Game(tester);
 		
 		int[] test = new int[] {2,2,2,2,2};
-		int[] test1 = new int[] {1,2,1,2,1};
 		
 		tg.handleScore(tester, "13", test);
-		tg.handleScore(tester, "2", test1);
-		tg.handleAction("3", tester, test);
+		tg.handleScore(tester, "7", test);
 		assertEquals(40, tester.getLargeStraight());
 	}
 	
@@ -113,10 +111,8 @@ public class PlayerTest extends TestCase {
 		Game tg = new Game(tester);
 		
 		int[] test = new int[] {2,2,2,2,2};
-		int[] test1 = new int[] {1,2,1,2,1};
 		tg.handleScore(tester, "13", test);
-		tg.handleScore(tester, "2", test1);
-		tg.handleAction("3", tester, test);
+		tg.handleScore(tester, "8", test);
 		assertEquals(30, tester.getSmallStraight());
 	}
 	
@@ -134,11 +130,9 @@ public class PlayerTest extends TestCase {
 		Game tg = new Game(tester);
 		
 		int[] test = new int[] {2,2,2,2,2};
-		int[] test2 = new int[] {1,2,1,2,1};
 		
 		tg.handleScore(tester, "13", test);
-		tg.handleScore(tester, "2", test2);
-		tg.handleAction("3", tester, test);
+		tg.handleScore(tester, "9", test);
 		assertEquals(25, tester.getFullHouse());
 	}
 	
@@ -189,12 +183,6 @@ public class PlayerTest extends TestCase {
 		tg.handleAction("3", tester, test2);
 		assertEquals(5,tester.getOnes());
 		assertEquals(100, tester.getAdditionYahtzee());
-		
-		tg.handleScore(tester, "13", test);
-		tg.handleScore(tester, "1", test1);
-		tg.handleAction("3", tester, test2);
-		assertEquals(0, tester.getTwos());
-		assertEquals(200, tester.getAdditionYahtzee());
 		
 		tg2.handleScore(tester2, "13", test1);
 		tg2.handleScore(tester2, "13", test2);
