@@ -97,12 +97,18 @@ public class GameTest extends TestCase{
 		assertEquals(true, tg.checkSecondCategory(player.checkOnes()));
 	}
 	
-	public void testRerollAll() {
+	public void testReroll() {
 		Player player = new Player();
 		Game tg = new Game(player);
-		tg.start();
-		assertEquals(2,tg.getRerollCount());
 		
+		int[] faceValue1 = tg.rollDice(); 
+		assertNotNull(null,faceValue1);
+		int[] faceValue2 = tg.rollDice();  //test reroll all dices
+		assertNotSame(faceValue1,faceValue2);
+		
+		int[] faceValue3 = tg.rerollDice(tg.rerollHelper(tg.inputConverter("1 2")));
+		assertEquals(faceValue2[0],faceValue3[0]); //test reroll selected position
+		assertEquals(faceValue2[1],faceValue3[1]);
 	}
 	
 }

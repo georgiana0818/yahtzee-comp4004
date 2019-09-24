@@ -30,7 +30,7 @@ public class Game {
 		String input = player.input(msg);
 		
 		if(input.equals("")) {
-			facevalues = rollDice(dices);
+			facevalues = rollDice();
 			
 			System.out.println(ui.showDices(dices));
 	
@@ -60,12 +60,7 @@ public class Game {
 						category = input;
 					}
 				}
-				
-				
 			}
-			
-			
-			
 		}
 	}
 	
@@ -87,7 +82,7 @@ public class Game {
 				System.out.println(ui.showDices(dices));
 				
 			}else if(action.equals("2")) {
-				facevalues = rollDice(dices);
+				facevalues = rollDice();
 				System.out.println(ui.showDices(dices));
 				
 			}else if(action.equals("3")) {
@@ -525,7 +520,7 @@ public class Game {
 		return scored;
 	}
 	
-	public int [] rollDice(Dice[] dices) {
+	public int [] rollDice() {
 		int [] facevalues = new int[dices.length];
 		for(int i = 0; i < dices.length; i++) {
 			dices[i].roll();
@@ -557,12 +552,15 @@ public class Game {
 		
 		return helper;
 	}
-	public void rerollDice(int[] hold) {
+	public int[] rerollDice(int[] hold) {
+		int[]face = new int[5];
 		for(int i = 0; i < hold.length;i++) {
 			if(hold[i] == 0) {
 				dices[i].roll();
 			}
+			face[i] = dices[i].getFaceValue();
 		}
+		return face;
 	}
 	
 	public int getRerollCount() {
