@@ -205,7 +205,7 @@ public class PlayerTest extends TestCase {
 		assertEquals(100, tester.getAdditionYahtzee());
 		
 		tg2.handleScore(tester2, "13", test1);
-		tg2.handleScore(tester2, "13", test2);
+		tg2.handleScore(tester2, "11", test2);
 		assertEquals(0, tester2.getAdditionYahtzee());
 	}
 	
