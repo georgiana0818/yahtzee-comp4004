@@ -1,5 +1,5 @@
 package YahtzeeGame.YahtzeeGame;
 
-public class Game {
+public class diceTest {
 
 }
