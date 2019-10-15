@@ -6,4 +6,8 @@ public class Dice {
 	public void roll() {
 		
 	}
+	
+	public void setDiceValue(int value) {
+		faceValue = value;
+	}
 }
