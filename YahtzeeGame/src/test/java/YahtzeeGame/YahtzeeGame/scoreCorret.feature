@@ -123,3 +123,4 @@ Feature: Score feature
       | ChanceScoreTwentyNine     |
       | ChanceScoreThirty         |
       | YahtzeeScoreFifty         |
+      | AdditionYahtzeeScore      |
